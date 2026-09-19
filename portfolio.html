@@ -1,0 +1,911 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gillen Deo A. Imperio | Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #070b14;
+            --bg-light: #0d1424;
+            --card: rgba(255,255,255,0.05);
+            --border: rgba(255,255,255,0.1);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --blue: #38bdf8;
+            --purple: #818cf8;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+
+            background: rgba(7, 11, 20, 0.75);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--blue);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 70px;
+
+            background:
+                radial-gradient(circle at 15% 20%, rgba(56,189,248,0.18), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(129,140,248,0.18), transparent 30%),
+                var(--bg);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeUp 1s ease;
+        }
+
+        .profile-photo {
+            width: 190px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 50%;
+
+            border: 4px solid var(--blue);
+
+            box-shadow:
+                0 0 30px rgba(56,189,248,0.25),
+                0 0 80px rgba(56,189,248,0.1);
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--blue);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--muted);
+            margin-bottom: 35px;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            margin: 0 auto 35px;
+            color: #cbd5e1;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 27px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            box-shadow: 0 10px 30px rgba(56,189,248,0.15);
+        }
+
+        .primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(56,189,248,0.3);
+        }
+
+        .secondary {
+            border: 1px solid var(--blue);
+            color: var(--blue);
+        }
+
+        .secondary:hover {
+            background: var(--blue);
+            color: #07111f;
+            transform: translateY(-4px);
+        }
+
+        /* ================= GENERAL ================= */
+
+        section {
+            padding: 110px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 55px;
+        }
+
+        .section-title span {
+            color: var(--blue);
+        }
+
+        /* ================= ABOUT ================= */
+
+        #about {
+            background: var(--bg-light);
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-text strong {
+            color: white;
+        }
+
+        .info-card {
+            padding: 30px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            backdrop-filter: blur(10px);
+
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .info-card h3 {
+            color: var(--blue);
+            margin-bottom: 20px;
+        }
+
+        .info-card p {
+            color: #cbd5e1;
+            margin: 12px 0;
+        }
+
+        /* ================= RESUME ================= */
+
+        .resume {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56,189,248,0.08),
+                    rgba(129,140,248,0.08)
+                );
+        }
+
+        .resume-box {
+            max-width: 750px;
+            margin: auto;
+
+            padding: 45px;
+
+            border: 1px solid var(--border);
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(15px);
+        }
+
+        .resume-box .resume-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .resume-box p {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skills {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .skill-card {
+            padding: 30px;
+            text-align: center;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--blue);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .skill-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+        }
+
+        /* ================= EXPLORE ================= */
+
+        #explore {
+            background: var(--bg-light);
+        }
+
+        .explore-grid {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 35px 25px;
+            text-align: center;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--blue);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        /* ================= EDUCATION ================= */
+
+        .education {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .education-item {
+            position: relative;
+
+            padding: 30px;
+            margin-bottom: 20px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            border-left: 4px solid var(--blue);
+
+            transition: 0.3s;
+        }
+
+        .education-item:hover {
+            transform: translateX(8px);
+            border-color: var(--blue);
+        }
+
+        .education-item h3 {
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+
+        .education-item p {
+            color: var(--muted);
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            text-align: center;
+            background: #030712;
+        }
+
+        .contact-box {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            margin: 25px 0;
+            font-size: 17px;
+        }
+
+        .contact-info strong {
+            color: var(--blue);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+
+            background: #020617;
+            border-top: 1px solid var(--border);
+
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ================= ANIMATION ================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .skills,
+            .explore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 6%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding-top: 150px;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-subtitle {
+                font-size: 17px;
+            }
+
+            .section-title {
+                font-size: 34px;
+            }
+
+            .resume-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <div class="logo">
+            Gillen Deo.
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#explore">Explore</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <img
+                src="images/file_00000000fff481faa76ad8ed358b7ee6.png"
+                alt="Photo of Gillen Deo A. Imperio"
+                class="profile-photo"
+            >
+
+            <h1>
+                Hi, I'm <span>Gillen Deo A. Imperio</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Student • Learner • Aspiring Technology Professional
+            </p>
+
+            <p class="hero-description">
+                Welcome to my personal portfolio. Here you can learn more
+                about me, my education, my skills, my experiences, and
+                my goals for the future.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#about" class="btn primary">
+                    About Me
+                </a>
+
+                <a href="https://canva.link/f3cq98cab0dk8wg" class="btn secondary">
+                    View Resume
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+        <h2 class="section-title">
+            About <span>Me</span>
+        </h2>
+
+        <div class="about-container">
+
+            <div class="about-text">
+
+                <p>
+                    Hello! I'm <strong>Gillen Deo A. Imperio</strong>,
+                    a student from Gonzaga National High School.
+                    I am passionate about learning new things,
+                    developing my skills, and exploring opportunities
+                    that can help me grow personally and academically.
+                </p>
+
+                <p>
+                    I am also an <strong>ATP trainee at Lyceum of Aparri</strong>,
+                    where I continue to gain experience, knowledge,
+                    and practical skills that I can use in the future.
+                </p>
+
+                <p>
+                    This portfolio represents who I am, what I am learning,
+                    and the things I hope to accomplish in the future.
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>Quick Information</h3>
+
+                <p>
+                    <strong>Name:</strong>
+                    Gillen Deo A. Imperio
+                </p>
+
+                <p>
+                    <strong>School:</strong>
+                    Grade 8 Gonzaga National High School
+                </p>
+
+                <p>
+                    <strong>Training:</strong>
+                    2026 - Present ATP Trainee
+                </p>
+
+                <p>
+                    <strong>Institution:</strong>
+                    Lyceum of Aparri
+                </p>
+
+                <p>
+                    <strong>Goal:</strong>
+                    To learn, grow, and build a future with technology
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RESUME ================= -->
+
+    <section class="resume" id="resume">
+
+        <h2 class="section-title">
+            My <span>Resume</span>
+        </h2>
+
+        <div class="resume-box">
+
+            <div class="resume-icon">
+                
+            </div>
+
+            <h3>
+                My Resume
+            </h3>
+
+            <p>
+                Want to know more about my education, experience,
+                skills, and goals? You can view my resume on Canva.
+            </p>
+
+            <a
+                href="https://canva.link/f3cq98cab0dk8wg"
+                target="_blank"
+                class="btn primary"
+            >
+                View My Resume
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SKILLS ================= -->
+
+    <section id="skills">
+
+        <h2 class="section-title">
+            My <span>Skills</span>
+        </h2>
+
+        <div class="skills">
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    
+                </div>
+
+                <h3>Learning</h3>
+
+                <p>
+                    Always willing to learn new concepts,
+                    technologies, and useful skills.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    
+                </div>
+
+                <h3>Technology</h3>
+
+                <p>
+                    Interested in technology, computers,
+                    and developing digital skills.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    
+                </div>
+
+                <h3>Creativity</h3>
+
+                <p>
+                    Enjoy creating, exploring ideas,
+                    and finding creative ways to solve problems.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EXPLORE ================= -->
+
+    <section id="explore">
+
+        <h2 class="section-title">
+            Explore <span>My Portfolio</span>
+        </h2>
+
+        <div class="explore-grid">
+
+            <div class="card">
+
+                <div class="icon">
+                    
+                </div>
+
+                <h3>Student Life</h3>
+
+                <p>
+                    Discover my journey as a student of
+                    Gonzaga National High School and the
+                    experiences that shape me.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    
+                </div>
+
+                <h3>Skills</h3>
+
+                <p>
+                    A collection of the skills and knowledge
+                    I develop through my studies and training.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    
+                </div>
+
+                <h3>Goals</h3>
+
+                <p>
+                    My goals, ambitions, and plans for
+                    personal and professional growth.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EDUCATION ================= -->
+
+    <section id="education">
+
+        <h2 class="section-title">
+            My <span>Education</span>
+        </h2>
+
+        <div class="education">
+
+            <div class="education-item">
+
+                <h3>
+                    Gonzaga National High School
+                </h3>
+
+                <p>
+                    Grade 8 Student
+                </p>
+
+            </div>
+
+
+            <div class="education-item">
+
+                <h3>
+                    Lyceum of Aparri
+                </h3>
+
+                <p>
+                    ATP Trainee
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <h2 class="section-title">
+            Let's <span>Connect</span>
+        </h2>
+
+        <div class="contact-box">
+
+            <p>
+                Thank you for visiting my portfolio!
+            </p>
+
+            <div class="contact-info">
+
+                <p>
+                    <strong>Email:</strong>
+                    gillendeoi@gmail.com
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    YOUR PHONE NUMBER HERE
+                </p>
+
+            </div>
+
+            <a
+                href="mailto:gillendeoi@gmail.com"
+                class="btn primary"
+            >
+                Contact Me
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Gillen Deo A. Imperio.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
+```
